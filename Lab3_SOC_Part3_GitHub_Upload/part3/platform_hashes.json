@@ -1,0 +1,10 @@
+{
+  "zynqmp_demo.cc": {
+    "original_sha256": "84dcfbf37c688f9f4b4117c7b574d9aaae130f3fb90f1bf93417e46e7915f148",
+    "installed_sha256": "45bf6fa43358727e366e23de9265ef495e3c56db77d6e39586d3e53dba1ba5c0"
+  },
+  "Makefile": {
+    "original_sha256": "6a3f1127c965b5855ce9d25f363ac07f9abeb03e933eb8e86e5ab81c265bbac7",
+    "installed_sha256": "cbed32fd2b1160a659f3de7cb43f73ea059d1f5fc900651e8c5431d031d0180f"
+  }
+}

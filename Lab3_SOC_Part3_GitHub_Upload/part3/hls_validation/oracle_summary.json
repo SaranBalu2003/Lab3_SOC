@@ -1,0 +1,9 @@
+{
+  "extended_cases": 410,
+  "original_cases": 27,
+  "combined_cases": 437,
+  "capacity_blocks": 128,
+  "random_cases": 350,
+  "exact_vs_sequential_fp32_differences": 164,
+  "vitis_validation": "NOT RUN"
+}

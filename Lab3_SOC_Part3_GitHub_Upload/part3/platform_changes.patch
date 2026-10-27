@@ -1,0 +1,72 @@
+--- a/zynqmp_demo.cc
++++ b/zynqmp_demo.cc
+@@ -43,6 +43,7 @@
+ #include "soc/interconnect/iconnect.h"
+ #include "tests/test-modules/memory.h"
+ #include "debugdev.h"
++#include "dot_accel.h"
+ #include "demo-dma.h"
+ #include "soc/xilinx/zynqmp/xilinx-zynqmp.h"
+ 
+@@ -64,7 +65,7 @@
+ 
+ #define NR_DEMODMA      4
+ #define NR_MASTERS	1 + NR_DEMODMA
+-#define NR_DEVICES	6 + NR_DEMODMA
++#define NR_DEVICES	7 + NR_DEMODMA
+ 
+ SC_MODULE(Top)
+ {
+@@ -73,6 +74,7 @@
+ 	xilinx_zynqmp zynq;
+ 	memory mem;
+ 	debugdev debug;
++	dot_accel dot;
+ 	demodma *dma[NR_DEMODMA];
+ 
+ 	sc_signal<bool> rst, rst_n;
+@@ -207,6 +209,7 @@
+ 		zynq("zynq", sk_descr),
+ 		mem("mem", sc_time(1, SC_NS), 64 * 1024),
+ 		debug("debug"),
++		dot("dot"),
+ 		rst("rst"),
+ 		rst_n("rst_n"),
+ #ifdef HAVE_VERILOG
+@@ -308,6 +311,7 @@
+ 		m_qk.set_global_quantum(quantum);
+ 
+ 		zynq.rst(rst);
++		dot.reset(rst);
+ 
+ 		for (i = 0; i < (sizeof dma / sizeof dma[0]); i++) {
+ 			char name[16];
+@@ -344,6 +348,9 @@
+ 		bus.memmap(0xa0800000ULL, 64 * 1024 - 1,
+ 				ADDRMODE_RELATIVE, -1, mem.socket);
+ 
++		bus.memmap(DOT_PHYS_BASE, DOT_MMIO_SIZE - 1,
++				ADDRMODE_RELATIVE, -1, dot.socket);
++
+ 		bus.memmap(0x0LL, 0xffffffff - 1,
+ 				ADDRMODE_RELATIVE, -1, *(zynq.s_axi_hpc_fpd[0]));
+ 
+@@ -355,6 +362,7 @@
+ 		}
+ 
+ 		debug.irq[0](zynq.pl2ps_irq[0]);
++		dot.irq(zynq.pl2ps_irq[DOT_IRQ_INDEX]);
+ 
+ #ifdef HAVE_VERILOG
+ 		/* Slow clock to keep simulation fast.  */
+--- a/Makefile
++++ b/Makefile
+@@ -105,6 +105,8 @@
+ 
+ ZYNQ_OBJS += $(ZYNQ_TOP_O)
+ ZYNQMP_OBJS += $(ZYNQMP_TOP_O)
++# Lab 3 Q8_0 accelerator (ZynqMP platform only).
++ZYNQMP_OBJS += dot_accel.o dot_math.o
+ ZYNQMP_LMAC2_OBJS += $(ZYNQMP_LMAC2_TOP_O)
+ VERSAL_MRMAC_OBJS += $(VERSAL_MRMAC_TOP_O)
+ VERSAL_DCMAC_OBJS += $(VERSAL_DCMAC_TOP_O)

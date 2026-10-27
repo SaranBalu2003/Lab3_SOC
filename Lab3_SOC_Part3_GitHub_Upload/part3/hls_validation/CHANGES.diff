@@ -1,0 +1,48 @@
+--- upstream/vec_dot_q8.cpp
++++ vec_dot_q8.cpp
+@@ -126,16 +126,17 @@
+     #pragma HLS INTERFACE mode=ap_none port=by
+     #pragma HLS INTERFACE mode=ap_none port=nrc
+ 
+-    // Each input holds eight block_q8_0 elements, matching the testbench.
++    // Lab 3 validation: each input holds up to 128 Q8_0 blocks.
+     // bram is for memory interface with signals like address, data and enable
+-    #pragma HLS INTERFACE mode=bram port=vx depth=8
+-    #pragma HLS INTERFACE mode=bram port=vy depth=8
++    #pragma HLS INTERFACE mode=bram port=vx depth=128
++    #pragma HLS INTERFACE mode=bram port=vy depth=128
+ 
+     const int qk = QK8_0;
+     const int nb = n / qk;
+ 
+     assert(n >= 0);
+     assert(n % qk == 0);
++    assert(nb <= DOT_MAX_BLOCKS);
+     assert(nrc == 1);
+     UNUSED(nrc);
+     UNUSED(bx);
+--- upstream/vec_dot_q8.h
++++ vec_dot_q8.h
+@@ -16,6 +16,9 @@
+ 
+ // This struct is taken from ggml-common.h line 252
+ #define QK8_0 32
++
++// Lab 3 local-buffer contract: at most 4096 elements per call.
++#define DOT_MAX_BLOCKS 128
+ typedef struct {
+     ggml_half d;       // delta
+     int8_t  qs[QK8_0]; // quants
+--- upstream/test_vec_dot_q8.cpp
++++ lab2_original_tests.cpp
+@@ -120,8 +120,8 @@
+     // Each test passes n to choose how many of these elements to process.
+     // initialize our block here
+     const int max_blocks = 8;
+-    block_q8_0 x[max_blocks] = {};
+-    block_q8_0 y[max_blocks] = {};
++    block_q8_0 x[DOT_MAX_BLOCKS] = {};
++    block_q8_0 y[DOT_MAX_BLOCKS] = {};
+     float result = 0.0f;
+ 
+     // initialize our result struct

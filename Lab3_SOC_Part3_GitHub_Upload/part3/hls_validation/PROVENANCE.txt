@@ -1,0 +1,5 @@
+Source archive: ece382m-20-fa26-lab-2-group-7-main.zip
+SHA256: 2a1530cca5b96ccacba7571395c7ceb89e1ff3069d0df2b542c69126b081861d
+Source directory: ece382m-20-fa26-lab-2-group-7-main/alternate_optimal_design/
+Upstream results date: October 13, 2026
+Purpose: Lab 3 128-block validation candidate; Vitis results pending.

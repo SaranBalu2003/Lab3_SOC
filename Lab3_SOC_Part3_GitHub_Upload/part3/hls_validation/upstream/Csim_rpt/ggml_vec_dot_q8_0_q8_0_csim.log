@@ -1,0 +1,37 @@
+INFO: [SIM 2] *************** CSIM start ***************
+INFO: [SIM 4] CSIM will launch GCC as the compiler.
+   Compiling ../../../../test_vec_dot_q8.cpp in debug mode
+   Compiling ../../../../vec_dot_q8.cpp in debug mode
+   Generating csim.exe
+Positive values: reference is 32 and actual is 32. Absolute error is 0, relative error percent is 0%
+Zero values: reference is 0 and actual is 0. Absolute error is 0Can't calculate due to 0 denominator case
+Negative values: reference is -32 and actual is -32. Absolute error is 0, relative error percent is 0%
+Fractional scales: reference is 4 and actual is 4. Absolute error is 0, relative error percent is 0%
+Two blocks: reference is 388 and actual is 388. Absolute error is 0, relative error percent is 0%
+Zero scale: reference is 0 and actual is 0. Absolute error is 0Can't calculate due to 0 denominator case
+Minimum integers: reference is 524288 and actual is 524288. Absolute error is 0, relative error percent is 0%
+Maximum integers: reference is 516128 and actual is 516128. Absolute error is 0, relative error percent is 0%
+Mixed integer limits: reference is -520192 and actual is -520192. Absolute error is 0, relative error percent is 0%
+Cancellation within a block: reference is 0 and actual is 0. Absolute error is 0Can't calculate due to 0 denominator case
+Cancellation across blocks: reference is 0 and actual is 0. Absolute error is 0Can't calculate due to 0 denominator case
+Nearly cancelling blocks: reference is 0.03125 and actual is 0.03125. Absolute error is 0, relative error percent is 0%
+Empty vector: reference is 0 and actual is 0. Absolute error is 0Can't calculate due to 0 denominator case
+Rounded decimal scales: reference is 0.509958476 and actual is 0.509958506. Absolute error is 2.98023224e-08, relative error percent is 5.84406845e-06%
+Minimum normal half scale: reference is 0.001953125 and actual is 0.001953125. Absolute error is 0, relative error percent is 0%
+Minimum subnormal half scale: reference is 1.90734863e-06 and actual is 1.90734863e-06. Absolute error is 0, relative error percent is 0%
+Two subnormal half scales: reference is 1.13686838e-13 and actual is 1.13686838e-13. Absolute error is 0, relative error percent is 0%
+Negative subnormal half scale: reference is -1.90734863e-06 and actual is -1.90734863e-06. Absolute error is 0, relative error percent is 0%
+Maximum subnormal half scale: reference is 0.00195121765 and actual is 0.00195121765. Absolute error is 0, relative error percent is 0%
+Maximum finite half scales: reference is 2.21458861e+15 and actual is 2.21458862e+15. Absolute error is 8355840, relative error percent is 3.77308903e-07%
+Three blocks: reference is 29259.304 and actual is 29259.3047. Absolute error is 0.000652313232, relative error percent is 2.22942156e-06%
+Eight blocks: reference is -130258.696 and actual is -130258.695. Absolute error is 0.000652313232, relative error percent is 5.00782867e-07%
+Eight random blocks: reference is 10623468 and actual is 10623468. Absolute error is 0.034286499, relative error percent is 3.22742998e-07%
+Serial cancellation <2^25, 1, -2^25, 0>: reference is 1 and actual is 1. Absolute error is 0, relative error percent is 0%
+Maximum-scale cancellation leaves 2^-48: reference is 3.55271368e-15 and actual is 3.55271368e-15. Absolute error is 0, relative error percent is 0%
+Maximum eight block sum: reference is 1.79968106e+16 and actual is 1.79968106e+16. Absolute error is 0, relative error percent is 0%
+Last element boundary check: reference is -16256 and actual is -16256. Absolute error is 0, relative error percent is 0%
+Maximum absolute error: 8355840
+Maximum relative error: 5.84406845e-06%
+27 test cases passed.
+INFO: [SIM 1] CSim done with 0 errors.
+INFO: [SIM 3] *************** CSIM finish ***************

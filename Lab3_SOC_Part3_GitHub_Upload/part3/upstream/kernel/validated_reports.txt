@@ -1,0 +1,239 @@
+
+sb69942@mario (/misc/scratch/sb69942/soc/Lab3/lab3_alternate_128_validation) % cat results/csynth_summary.rpt
+
+
+================================================================
+== Synthesis Summary Report of 'ggml_vec_dot_q8_0_q8_0'
+================================================================
++ General Information:
+    * Date:           Sat Oct 24 21:59:38 2026
+    * Version:        2022.2 (Build 3670227 on Oct 13 2022)
+    * Project:        hls_alt128_validation
+    * Solution:       solution1 (Vivado IP Flow Target)
+    * Product family: zynquplus
+    * Target device:  xczu3eg-sbva484-1-e
+
+
++ Performance & Resource Estimates:
+
+    PS: '+' for module; 'o' for loop; '*' for dataflow
+    +------------------------------------------------------+------+------+---------+-----------+----------+---------+------+----------+------+---------+------------+-----------+-----+
+    |                        Modules                       | Issue|      | Latency |  Latency  | Iteration|         | Trip |          |      |         |            |           |     |
+    |                        & Loops                       | Type | Slack| (cycles)|    (ns)   |  Latency | Interval| Count| Pipelined| BRAM |   DSP   |     FF     |    LUT    | URAM|
+    +------------------------------------------------------+------+------+---------+-----------+----------+---------+------+----------+------+---------+------------+-----------+-----+
+    |+ ggml_vec_dot_q8_0_q8_0                              |     -|  0.06|      141|  1.410e+03|         -|      142|     -|        no|     -|  3 (~0%)|   1708 (1%)|  6361 (9%)|    -|
+    | + ggml_vec_dot_q8_0_q8_0_Pipeline_VITIS_LOOP_167_1   |     -|  0.06|      132|  1.320e+03|         -|      132|     -|        no|     -|  3 (~0%)|  1331 (~0%)|  3504 (4%)|    -|
+    |  o VITIS_LOOP_167_1                                  |     -|  7.30|      130|  1.300e+03|         4|        1|   128|       yes|     -|        -|           -|          -|    -|
+    | + ggml_vec_dot_q8_0_q8_0_Pipeline_VITIS_LOOP_1211_1  |     -|  2.87|        4|     40.000|         -|        4|     -|        no|     -|        -|   167 (~0%)|  609 (~0%)|    -|
+    |  o VITIS_LOOP_1211_1                                 |     -|  7.30|        2|     20.000|         1|        1|     2|       yes|     -|        -|           -|          -|    -|
+    +------------------------------------------------------+------+------+---------+-----------+----------+---------+------+----------+------+---------+------------+-----------+-----+
+
+
+================================================================
+== HW Interfaces
+================================================================
+* BRAM
++-----------+------------+---------------+
+| Interface | Data Width | Address Width |
++-----------+------------+---------------+
+| vx_PORTA  | 512        | 32            |
+| vy_PORTA  | 512        | 32            |
++-----------+------------+---------------+
+
+* Other Ports
++-----------+---------+----------+
+| Interface | Mode    | Bitwidth |
++-----------+---------+----------+
+| bs        | ap_none | 64       |
+| bx        | ap_none | 64       |
+| by        | ap_none | 64       |
+| n         | ap_none | 32       |
+| nrc       | ap_none | 32       |
+| s         | ap_none | 32       |
++-----------+---------+----------+
+
+* TOP LEVEL CONTROL
++-----------+------------+-----------------------------------+
+| Interface | Type       | Ports                             |
++-----------+------------+-----------------------------------+
+| ap_clk    | clock      | ap_clk                            |
+| ap_rst    | reset      | ap_rst                            |
+| ap_ctrl   | ap_ctrl_hs | ap_done ap_idle ap_ready ap_start |
++-----------+------------+-----------------------------------+
+
+
+================================================================
+== SW I/O Information
+================================================================
+* Top Function Arguments
++----------+-----------+-------------------+
+| Argument | Direction | Datatype          |
++----------+-----------+-------------------+
+| n        | in        | int               |
+| s        | out       |                   |
+| bs       | in        | long unsigned int |
+| vx       | in        |                   |
+| bx       | in        | long unsigned int |
+| vy       | in        |                   |
+| by       | in        | long unsigned int |
+| nrc      | in        | int               |
++----------+-----------+-------------------+
+
+* SW-to-HW Mapping
++----------+--------------+-----------+
+| Argument | HW Interface | HW Type   |
++----------+--------------+-----------+
+| n        | n            | port      |
+| s        | s            | port      |
+| bs       | bs           | port      |
+| vx       | vx_PORTA     | interface |
+| bx       | bx           | port      |
+| vy       | vy_PORTA     | interface |
+| by       | by           | port      |
+| nrc      | nrc          | port      |
++----------+--------------+-----------+
+
+
+================================================================
+== M_AXI Burst Information
+================================================================
+ Note: All burst requests might be further partitioned into multiple requests during RTL generation based on max_read_burst_length or max_write_burst_length settings.
+
+  No burst in design
+
+================================================================
+== Bind Op Report
+================================================================
++------------------------------------------------------+-----+--------+--------------------------+-----+--------+---------+
+| Name                                                 | DSP | Pragma | Variable                 | Op  | Impl   | Latency |
++------------------------------------------------------+-----+--------+--------------------------+-----+--------+---------+
+| + ggml_vec_dot_q8_0_q8_0                             | 3   |        |                          |     |        |         |
+|   tmp_V_fu_202_p2                                    | -   |        | tmp_V                    | sub | fabric | 0       |
+|   NZeros_fu_246_p2                                   | -   |        | NZeros                   | add | fabric | 0       |
+|   sub_ln1099_fu_260_p2                               | -   |        | sub_ln1099               | sub | fabric | 0       |
+|   lsb_index_fu_277_p2                                | -   |        | lsb_index                | add | fabric | 0       |
+|   sub_ln1102_fu_298_p2                               | -   |        | sub_ln1102               | sub | fabric | 0       |
+|   add_ln1109_fu_379_p2                               | -   |        | add_ln1109               | add | fabric | 0       |
+|   sub_ln1110_fu_394_p2                               | -   |        | sub_ln1110               | sub | fabric | 0       |
+|   m_1_fu_429_p2                                      | -   |        | m_1                      | add | fabric | 0       |
+|  + ggml_vec_dot_q8_0_q8_0_Pipeline_VITIS_LOOP_167_1  | 3   |        |                          |     |        |         |
+|    add_ln167_fu_336_p2                               | -   |        | add_ln167                | add | fabric | 0       |
+|    mul_8s_8s_16_1_1_U1                               | -   | yes    | product_32               | mul | fabric | 0       |
+|    mul_8s_8s_16_1_1_U2                               | -   | yes    | product                  | mul | fabric | 0       |
+|    mul_8s_8s_16_1_1_U3                               | -   | yes    | product_2                | mul | fabric | 0       |
+|    mul_8s_8s_16_1_1_U4                               | -   | yes    | product_3                | mul | fabric | 0       |
+|    mul_8s_8s_16_1_1_U5                               | -   | yes    | product_4                | mul | fabric | 0       |
+|    mul_8s_8s_16_1_1_U6                               | -   | yes    | product_5                | mul | fabric | 0       |
+|    mul_8s_8s_16_1_1_U7                               | -   | yes    | product_6                | mul | fabric | 0       |
+|    mul_8s_8s_16_1_1_U8                               | -   | yes    | product_7                | mul | fabric | 0       |
+|    mul_8s_8s_16_1_1_U9                               | -   | yes    | product_8                | mul | fabric | 0       |
+|    mul_8s_8s_16_1_1_U10                              | -   | yes    | product_9                | mul | fabric | 0       |
+|    mul_8s_8s_16_1_1_U11                              | -   | yes    | product_10               | mul | fabric | 0       |
+|    mul_8s_8s_16_1_1_U12                              | -   | yes    | product_11               | mul | fabric | 0       |
+|    mul_8s_8s_16_1_1_U13                              | -   | yes    | product_12               | mul | fabric | 0       |
+|    mul_8s_8s_16_1_1_U14                              | -   | yes    | product_13               | mul | fabric | 0       |
+|    mul_8s_8s_16_1_1_U15                              | -   | yes    | product_14               | mul | fabric | 0       |
+|    mul_8s_8s_16_1_1_U16                              | -   | yes    | product_15               | mul | fabric | 0       |
+|    mul_8s_8s_16_1_1_U17                              | -   | yes    | product_16               | mul | fabric | 0       |
+|    mul_8s_8s_16_1_1_U18                              | -   | yes    | product_17               | mul | fabric | 0       |
+|    mul_8s_8s_16_1_1_U19                              | -   | yes    | product_18               | mul | fabric | 0       |
+|    mul_8s_8s_16_1_1_U20                              | -   | yes    | product_19               | mul | fabric | 0       |
+|    mul_8s_8s_16_1_1_U21                              | -   | yes    | product_20               | mul | fabric | 0       |
+|    mul_8s_8s_16_1_1_U22                              | -   | yes    | product_21               | mul | fabric | 0       |
+|    mul_8s_8s_16_1_1_U23                              | -   | yes    | product_22               | mul | fabric | 0       |
+|    mul_8s_8s_16_1_1_U24                              | -   | yes    | product_23               | mul | fabric | 0       |
+|    mul_8s_8s_16_1_1_U25                              | -   | yes    | product_24               | mul | fabric | 0       |
+|    mul_8s_8s_16_1_1_U26                              | -   | yes    | product_25               | mul | fabric | 0       |
+|    mul_8s_8s_16_1_1_U27                              | -   | yes    | product_26               | mul | fabric | 0       |
+|    mul_8s_8s_16_1_1_U28                              | -   | yes    | product_27               | mul | fabric | 0       |
+|    mul_8s_8s_16_1_1_U29                              | -   | yes    | product_28               | mul | fabric | 0       |
+|    mul_8s_8s_16_1_1_U30                              | -   | yes    | product_29               | mul | fabric | 0       |
+|    mul_8s_8s_16_1_1_U31                              | -   | yes    | product_30               | mul | fabric | 0       |
+|    mul_8s_8s_16_1_1_U32                              | -   | yes    | product_31               | mul | fabric | 0       |
+|    add_ln175_fu_1569_p2                              | -   |        | add_ln175                | add | fabric | 0       |
+|    add_ln175_1_fu_1579_p2                            | -   |        | add_ln175_1              | add | fabric | 0       |
+|    add_ln175_2_fu_1589_p2                            | -   |        | add_ln175_2              | add | fabric | 0       |
+|    add_ln175_3_fu_1599_p2                            | -   |        | add_ln175_3              | add | fabric | 0       |
+|    add_ln175_4_fu_1609_p2                            | -   |        | add_ln175_4              | add | fabric | 0       |
+|    add_ln175_5_fu_1619_p2                            | -   |        | add_ln175_5              | add | fabric | 0       |
+|    add_ln175_6_fu_1629_p2                            | -   |        | add_ln175_6              | add | fabric | 0       |
+|    add_ln175_7_fu_1639_p2                            | -   |        | add_ln175_7              | add | fabric | 0       |
+|    add_ln175_8_fu_1649_p2                            | -   |        | add_ln175_8              | add | fabric | 0       |
+|    add_ln175_9_fu_1659_p2                            | -   |        | add_ln175_9              | add | fabric | 0       |
+|    add_ln175_10_fu_1669_p2                           | -   |        | add_ln175_10             | add | fabric | 0       |
+|    add_ln175_11_fu_1679_p2                           | -   |        | add_ln175_11             | add | fabric | 0       |
+|    add_ln175_12_fu_1689_p2                           | -   |        | add_ln175_12             | add | fabric | 0       |
+|    add_ln175_13_fu_1699_p2                           | -   |        | add_ln175_13             | add | fabric | 0       |
+|    add_ln175_14_fu_1709_p2                           | -   |        | add_ln175_14             | add | fabric | 0       |
+|    add_ln175_15_fu_1715_p2                           | -   |        | add_ln175_15             | add | fabric | 0       |
+|    add_ln175_16_fu_1725_p2                           | -   |        | add_ln175_16             | add | fabric | 0       |
+|    add_ln175_17_fu_1735_p2                           | -   |        | add_ln175_17             | add | fabric | 0       |
+|    add_ln175_18_fu_1745_p2                           | -   |        | add_ln175_18             | add | fabric | 0       |
+|    add_ln175_19_fu_1755_p2                           | -   |        | add_ln175_19             | add | fabric | 0       |
+|    add_ln175_20_fu_1765_p2                           | -   |        | add_ln175_20             | add | fabric | 0       |
+|    add_ln175_21_fu_1775_p2                           | -   |        | add_ln175_21             | add | fabric | 0       |
+|    add_ln175_22_fu_1785_p2                           | -   |        | add_ln175_22             | add | fabric | 0       |
+|    add_ln175_23_fu_1795_p2                           | -   |        | add_ln175_23             | add | fabric | 0       |
+|    add_ln175_24_fu_1805_p2                           | -   |        | add_ln175_24             | add | fabric | 0       |
+|    add_ln175_25_fu_1815_p2                           | -   |        | add_ln175_25             | add | fabric | 0       |
+|    add_ln175_26_fu_1825_p2                           | -   |        | add_ln175_26             | add | fabric | 0       |
+|    add_ln175_27_fu_1835_p2                           | -   |        | add_ln175_27             | add | fabric | 0       |
+|    add_ln175_28_fu_1845_p2                           | -   |        | add_ln175_28             | add | fabric | 0       |
+|    add_ln175_29_fu_1855_p2                           | -   |        | add_ln175_29             | add | fabric | 0       |
+|    sumi_fu_1993_p2                                   | -   |        | sumi                     | add | fabric | 0       |
+|    scale_exponent_shift_V_3_fu_1895_p2               | -   |        | scale_exponent_shift_V_3 | add | fabric | 0       |
+|    scale_exponent_shift_V_fu_1951_p2                 | -   |        | scale_exponent_shift_V   | add | fabric | 0       |
+|    mul_mul_11ns_11ns_22_1_1_U34                      | 1   | yes    | ret_V                    | mul | dsp48  | 0       |
+|    mul_22ns_21s_42_1_1_U33                           | 2   |        | mul_ln1494               | mul | auto   | 0       |
+|    scaled_sum_V_fu_2041_p2                           | -   |        | scaled_sum_V             | sub | fabric | 0       |
+|    combined_shift_V_fu_1981_p2                       | -   |        | combined_shift_V         | add | fabric | 0       |
+|    total_V_1_fu_2070_p2                              | -   |        | total_V_1                | add | fabric | 0       |
+|  + ggml_vec_dot_q8_0_q8_0_Pipeline_VITIS_LOOP_1211_1 | 0   |        |                          |     |        |         |
+|    i_2_fu_113_p2                                     | -   |        | i_2                      | add | fabric | 0       |
+|    sub_ln1213_fu_134_p2                              | -   |        | sub_ln1213               | sub | fabric | 0       |
+|    NZeros_1_fu_173_p2                                | -   |        | NZeros_1                 | add | fabric | 0       |
++------------------------------------------------------+-----+--------+--------------------------+-----+--------+---------+
+
+
+================================================================
+== Bind Storage Report
+================================================================
+  No bind storage info in design
+
+================================================================
+== Pragma Report
+================================================================
+* Valid Pragma Syntax
++-----------+--------------------------------------------------------+-------------------------------------------------------------------+
+| Type      | Options                                                | Location                                                          |
++-----------+--------------------------------------------------------+-------------------------------------------------------------------+
+| interface | mode=ap_ctrl_hs port=return                            | vec_dot_q8.cpp:118 in ggml_vec_dot_q8_0_q8_0, return              |
+| interface | mode=ap_none port=n                                    | vec_dot_q8.cpp:122 in ggml_vec_dot_q8_0_q8_0, n                   |
+| interface | mode=ap_none port=s depth=1                            | vec_dot_q8.cpp:123 in ggml_vec_dot_q8_0_q8_0, s                   |
+| interface | mode=ap_none port=bs                                   | vec_dot_q8.cpp:124 in ggml_vec_dot_q8_0_q8_0, bs                  |
+| interface | mode=ap_none port=bx                                   | vec_dot_q8.cpp:125 in ggml_vec_dot_q8_0_q8_0, bx                  |
+| interface | mode=ap_none port=by                                   | vec_dot_q8.cpp:126 in ggml_vec_dot_q8_0_q8_0, by                  |
+| interface | mode=ap_none port=nrc                                  | vec_dot_q8.cpp:127 in ggml_vec_dot_q8_0_q8_0, nrc                 |
+| interface | mode=bram port=vx depth=128                            | vec_dot_q8.cpp:131 in ggml_vec_dot_q8_0_q8_0, vx                  |
+| interface | mode=bram port=vy depth=128                            | vec_dot_q8.cpp:132 in ggml_vec_dot_q8_0_q8_0, vy                  |
+| pipeline  | II=1                                                   | vec_dot_q8.cpp:168 in ggml_vec_dot_q8_0_q8_0                      |
+| unroll    |                                                        | vec_dot_q8.cpp:171 in ggml_vec_dot_q8_0_q8_0                      |
+| bind_op   | variable=product op=mul impl=fabric                    | vec_dot_q8.cpp:173 in ggml_vec_dot_q8_0_q8_0, product             |
+| bind_op   | variable=significand_product op=mul impl=dsp latency=0 | vec_dot_q8.cpp:183 in ggml_vec_dot_q8_0_q8_0, significand_product |
++-----------+--------------------------------------------------------+-------------------------------------------------------------------+
+
+
+sb69942@mario (/misc/scratch/sb69942/soc/Lab3/lab3_alternate_128_validation) % cat results/alternate128_cosim.rpt
+Report time       : Sat Oct 24 22:00:05 CDT 2026.
+Solution          : solution1.
+Simulation tool   : xsim.
+
++----------+----------+-----------------------------------------------+-----------------------------------------------+----------------------+
+|          |          |             Latency(Clock Cycles)             |              Interval(Clock Cycles)           | Total Execution Time |
++   RTL    +  Status  +-----------------------------------------------+-----------------------------------------------+    (Clock Cycles)    +
+|          |          |      min      |      avg      |      max      |      min      |      avg      |      max      |                      |
++----------+----------+-----------------------------------------------+-----------------------------------------------+----------------------+
+|      VHDL|        NA|             NA|             NA|             NA|             NA|             NA|             NA|                    NA|
+|   Verilog|      Pass|              5|             42|            138|              6|             43|            139|                 19135|
++----------+----------+-----------------------------------------------+-----------------------------------------------+----------------------+
+sb69942@mario (/misc/scratch/sb69942/soc/Lab3/lab3_alternate_128_validation) %

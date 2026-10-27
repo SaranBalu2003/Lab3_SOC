@@ -1,0 +1,8 @@
+{
+  "platform_input_archive_sha256": "ae9a4aa8acfe7209214f19805715f749601da38c4ceb0b14349d1d43f92c47e0",
+  "lab2_source_archive_sha256": "2a1530cca5b96ccacba7571395c7ceb89e1ff3069d0df2b542c69126b081861d",
+  "selected_kernel": "alternate_optimal_design expanded to 128 blocks; 10 ns target, block II=1, Verilog Pass in supplied reports",
+  "local_numerical_check": "410 golden vectors at 0 ULP; 63488 finite-half scale checks; invalid-input checks; UBSan pass",
+  "systemc_test_status": "PENDING: SystemC not installed in preparation environment",
+  "qemu_integration_status": "PENDING: build and run on mario"
+}
